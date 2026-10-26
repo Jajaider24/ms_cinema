@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
+import { TheatersModule } from './theaters/theaters.module.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,9 +23,10 @@ const __dirname = dirname(__filename);
         database: configService.get<string>('DB_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         autoLoadEntities: true,
-        synchronize: false,
+        synchronize: true,
       }),
     }),
+    TheatersModule,
   ],
 })
 export class AppModule {}
